@@ -1,0 +1,21 @@
+@import "src/assets/style-guides/index.scss";
+
+.root {
+  height: 100%;
+  @include flexColumnNowrapContentStartItemsCenter();
+
+  &-header {
+    @include width100HeightValue($headerHeight);
+    @include flexRowNowrapContentBetweenItemsCenter();
+    padding: 0 24px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+
+    &-links {
+    }
+  }
+
+  &-main {
+    width: $containerWidth;
+    padding: 24px;
+  }
+}

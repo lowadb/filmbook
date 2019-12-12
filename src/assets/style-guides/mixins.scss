@@ -1,0 +1,48 @@
+@import "colors.scss";
+
+@mixin scrollbar() {
+  &::-webkit-scrollbar {
+    width: 3px;
+
+    &-track {
+      background: transparent;
+    }
+
+    &-thumb {
+      background: $blue;
+      border-radius: 1.5px;
+
+      &:hover {
+        background: darken($blue, 10%);
+      }
+    }
+  }
+}
+
+
+@mixin width100HeightValue($value) {
+  width: 100%;
+  height: $value;
+}
+
+@mixin flexRowNoWrap() {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+@mixin flexColumnNoWrap() {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+@mixin flexColumnNowrapContentStartItemsCenter() {
+  @include flexColumnNoWrap();
+  justify-content: flex-start;
+  align-items: center;
+}
+
+@mixin flexRowNowrapContentBetweenItemsCenter() {
+  @include flexRowNoWrap();
+  justify-content: space-between;
+  align-items: center;
+}
