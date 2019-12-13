@@ -4,6 +4,7 @@ import {SetFoundedFilmsAction} from './film.actions';
 
 export const reducers = combineActionReducers(initialFilmState, {
   [SetFoundedFilmsAction.TYPE]: (state: FilmState, action: SetFoundedFilmsAction) => {
+    console.log(action.payload.films);
     return {
       ...state,
       foundedFilms: action.payload.films

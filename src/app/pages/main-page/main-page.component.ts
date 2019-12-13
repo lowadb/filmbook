@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Observable, Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, takeUntil} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 import {Film, FilmState} from '../../stores/film/film.state';
 import {Store} from '@ngrx/store';
@@ -28,7 +28,11 @@ export class MainPageComponent implements OnInit, OnDestroy {
   ) {
     this.completions$ = this.filmStore$.select(getFoundedFilmsSelector);
     this.autoCompleteForm.valueChanges
-      .pipe(takeUntil(this.destroyed$))
+      .pipe(
+        takeUntil(this.destroyed$),
+        debounceTime(500),
+        distinctUntilChanged(),
+      )
       .subscribe(changes => {
         if (!changes || !changes.query || changes.query.length < environment.minQueryLength) {
           this.filmStore$.dispatch(new SearchByAutoCompleteFilmsAction({query: ''}));

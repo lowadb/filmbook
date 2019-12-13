@@ -12,9 +12,10 @@
              [matAutocomplete]="auto"
              class="page-main-complete-input">
       <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let completion of completions"
+        <mat-option *ngFor="let completion of completions$ | async"
                     [value]="completion">
-          {{completion}}
+          {{completion.Title}}
+<!--          <img src="{{}}" alt="">-->
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>

@@ -15,11 +15,9 @@ export class FilmEffects {
   ) {
   }
 
-  @Effect({dispatch: false})
+  @Effect()
   foundedFilmsEffect = this.actions$.pipe(
     ofType<SearchByAutoCompleteFilmsAction>(SearchByAutoCompleteFilmsAction.TYPE),
-    debounceTime(100),
-    distinctUntilChanged(),
     switchMap(action => this.filmService.getAutoCompleteVariants(action.payload.query)),
     map(films => new SetFoundedFilmsAction({films}))
   );
