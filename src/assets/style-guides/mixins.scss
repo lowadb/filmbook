@@ -25,6 +25,11 @@
   height: $value;
 }
 
+@mixin widthHeightValue($value) {
+  width: $value;
+  height: $value;
+}
+
 @mixin width100HeightContent {
   width: 100%;
   height: fit-content;

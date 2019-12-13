@@ -3,17 +3,18 @@
     <h1 class="page-header-title">Поиск фильмов</h1>
   </header>
   <main class="page-main">
-    <form (submit)="submitSearch($event)"
+    <form (submit)="search()"
           [formGroup]="autoCompleteForm"
           class="page-main-form">
       <mat-form-field class="page-main-form-complete cerulean-theme">
         <input type="text"
                matInput
+               autofocus
                formControlName="query"
                placeholder="Начните вводить название фильма ..."
                [matAutocomplete]="auto"
                class="page-main-form-complete-input">
-        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectSearch($event)">
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="search()">
           <mat-option *ngFor="let completion of completions$ | async"
                       [value]="completion.Title">
             {{completion.Title}}
@@ -21,5 +22,23 @@
         </mat-autocomplete>
       </mat-form-field>
     </form>
+    <div class="page-main-founds" *ngFor="let film of foundedFilms$ | async">
+      <mat-card class="page-main-founds-film">
+        <mat-card-header>
+          <div mat-card-avatar>
+            <img [src]="film.Poster"
+                 [alt]="film.Title"
+                 class="page-main-founds-film-poster">
+          </div>
+          <mat-card-title>{{film.Title}}</mat-card-title>
+          <mat-card-subtitle>{{film.Year}}</mat-card-subtitle>
+          <mat-card-subtitle>{{film.Type}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions>
+          <button mat-button>LIKE</button>
+          <button mat-button>SHARE</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
   </main>
 </section>

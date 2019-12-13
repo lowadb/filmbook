@@ -24,5 +24,15 @@
         }
       }
     }
+
+    &-founds {
+      &-film {
+        &-poster {
+          @include widthHeightValue(40px);
+          border-radius: 4px;
+          object-fit: cover;
+        }
+      }
+    }
   }
 }

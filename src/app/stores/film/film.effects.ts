@@ -4,7 +4,12 @@ import {FilmState} from './film.state';
 import {Store} from '@ngrx/store';
 import {map, switchMap} from 'rxjs/operators';
 import {FilmService} from './film.service';
-import {SearchByAutoCompleteFilmAction, SetFoundedByCompleteFilmsAction, SetFoundedBySearchFilmsAction} from './film.actions';
+import {
+  SearchByAutoCompleteFilmAction,
+  SearchFilmAction,
+  SetFoundedByCompleteFilmsAction,
+  SetFoundedBySearchFilmsAction
+} from './film.actions';
 
 @Injectable()
 export class FilmEffects {
@@ -24,7 +29,7 @@ export class FilmEffects {
 
   @Effect()
   searchFilmEffect = this.actions$.pipe(
-    ofType<SearchByAutoCompleteFilmAction>(SearchByAutoCompleteFilmAction.TYPE),
+    ofType<SearchFilmAction>(SearchFilmAction.TYPE),
     switchMap(action => this.filmService.searchFilmByTitle(action.payload.query)),
     map(films => new SetFoundedBySearchFilmsAction({films}))
   );

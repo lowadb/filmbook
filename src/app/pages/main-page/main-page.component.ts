@@ -6,8 +6,7 @@ import {environment} from '../../../environments/environment';
 import {Film, FilmState} from '../../stores/film/film.state';
 import {Store} from '@ngrx/store';
 import {SearchByAutoCompleteFilmAction, SearchFilmAction} from '../../stores/film/film.actions';
-import {getFoundedFilmsSelector} from '../../stores/film/film.selectors';
-import {MatAutocompleteSelectedEvent} from '@angular/material';
+import {getFoundedByCompleteFilmsSelector, getFoundedBySearchFilmsSelector} from '../../stores/film/film.selectors';
 
 @Component({
   selector: 'app-main-page',
@@ -19,13 +18,17 @@ export class MainPageComponent implements OnInit, OnDestroy {
     query: new FormControl('')
   });
   completions$: Observable<Film[]>;
+  foundedFilms$: Observable<Film[]>;
   destroyed$ = new Subject();
+  imgUrl: string;
 
 
   constructor(
     private filmStore$: Store<FilmState>
   ) {
-    this.completions$ = this.filmStore$.select(getFoundedFilmsSelector);
+    // this.imgUrl = `${environment.apiPosterUrl}?apikey=${environment.apiKey}&i=`;
+    this.completions$ = this.filmStore$.select(getFoundedByCompleteFilmsSelector);
+    this.foundedFilms$ = this.filmStore$.select(getFoundedBySearchFilmsSelector);
     this.autoCompleteForm.valueChanges
       .pipe(
         takeUntil(this.destroyed$),
@@ -48,13 +51,8 @@ export class MainPageComponent implements OnInit, OnDestroy {
     this.destroyed$.next();
   }
 
-  submitSearch($event: Event) {
-    console.log(`search `, {$event});
-    this.filmStore$.dispatch(new SearchFilmAction({query: ''}));
-  }
-
-  selectSearch($event: MatAutocompleteSelectedEvent) {
-    console.log(`select `, {$event});
-    this.filmStore$.dispatch(new SearchFilmAction({query: ''}));
+  search() {
+    const {query} = this.autoCompleteForm.getRawValue();
+    this.filmStore$.dispatch(new SearchFilmAction({query}));
   }
 }
