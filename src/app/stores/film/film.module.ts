@@ -5,6 +5,7 @@ import {EffectsModule} from '@ngrx/effects';
 import {FilmEffects} from './film.effects';
 import {FILM_FEATURE_NAME} from './film.state';
 import {filmReducer} from './film.reducer';
+import {FilmService} from './film.service';
 
 
 @NgModule({
@@ -13,7 +14,10 @@ import {filmReducer} from './film.reducer';
     CommonModule,
     StoreModule.forFeature(FILM_FEATURE_NAME, filmReducer),
     EffectsModule.forFeature([FilmEffects])
+  ],
+  providers: [
+    FilmService
   ]
 })
-export class FilmModule {
+export class FilmStoreModule {
 }

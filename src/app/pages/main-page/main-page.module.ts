@@ -4,6 +4,7 @@ import {MainPageComponent} from './main-page.component';
 import {RouterModule} from '@angular/router';
 import {MatAutocompleteModule, MatFormFieldModule, MatInputModule} from '@angular/material';
 import {ReactiveFormsModule} from '@angular/forms';
+import {FilmStoreModule} from '../../stores/film/film.module';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     MatFormFieldModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
-    MatInputModule
+    MatInputModule,
+    FilmStoreModule
   ],
   declarations: [MainPageComponent],
   exports: [MainPageComponent],
