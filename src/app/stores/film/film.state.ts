@@ -3,13 +3,15 @@ export const REQUEST_LIMIT = 10;
 
 export interface FilmState {
   films: Film[];
-  foundedFilms: Film[];
+  completeFoundedFilms: Film[];
+  searchFoundedFilms: Film[];
   savedFilms: Film[];
 }
 
 export const initialFilmState: FilmState = {
   films: [],
-  foundedFilms: [],
+  completeFoundedFilms: [],
+  searchFoundedFilms: [],
   savedFilms: [],
 };
 

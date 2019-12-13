@@ -5,8 +5,9 @@ import {debounceTime, distinctUntilChanged, takeUntil} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 import {Film, FilmState} from '../../stores/film/film.state';
 import {Store} from '@ngrx/store';
-import {SearchByAutoCompleteFilmsAction} from '../../stores/film/film.actions';
+import {SearchByAutoCompleteFilmAction, SearchFilmAction} from '../../stores/film/film.actions';
 import {getFoundedFilmsSelector} from '../../stores/film/film.selectors';
+import {MatAutocompleteSelectedEvent} from '@angular/material';
 
 @Component({
   selector: 'app-main-page',
@@ -17,9 +18,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
   autoCompleteForm = new FormGroup({
     query: new FormControl('')
   });
-  completions: any[] = [1, 2, 3];
   completions$: Observable<Film[]>;
-
   destroyed$ = new Subject();
 
 
@@ -35,10 +34,10 @@ export class MainPageComponent implements OnInit, OnDestroy {
       )
       .subscribe(changes => {
         if (!changes || !changes.query || changes.query.length < environment.minQueryLength) {
-          this.filmStore$.dispatch(new SearchByAutoCompleteFilmsAction({query: ''}));
+          this.filmStore$.dispatch(new SearchByAutoCompleteFilmAction({query: ''}));
           return;
         }
-        this.filmStore$.dispatch(new SearchByAutoCompleteFilmsAction(changes));
+        this.filmStore$.dispatch(new SearchByAutoCompleteFilmAction(changes));
       });
   }
 
@@ -47,5 +46,15 @@ export class MainPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.destroyed$.next();
+  }
+
+  submitSearch($event: Event) {
+    console.log(`search `, {$event});
+    this.filmStore$.dispatch(new SearchFilmAction({query: ''}));
+  }
+
+  selectSearch($event: MatAutocompleteSelectedEvent) {
+    console.log(`select `, {$event});
+    this.filmStore$.dispatch(new SearchFilmAction({query: ''}));
   }
 }

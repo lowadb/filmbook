@@ -13,7 +13,7 @@ export class FilmService {
   ) {
   }
 
-  getAutoCompleteVariants(query: string): Observable<Film[]> {
+  searchFilmByTitle(query: string): Observable<Film[]> {
     return this.http.get<FilmSearchDTO>(`${environment.apiUrl}`, {
       params: {
         apikey: environment.apiKey,

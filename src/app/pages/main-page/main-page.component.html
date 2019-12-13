@@ -3,21 +3,23 @@
     <h1 class="page-header-title">Поиск фильмов</h1>
   </header>
   <main class="page-main">
-    <mat-form-field class="page-main-complete cerulean-theme"
-                    [formGroup]="autoCompleteForm">
-      <input type="text"
-             matInput
-             formControlName="query"
-             placeholder="Начните вводить название фильма ..."
-             [matAutocomplete]="auto"
-             class="page-main-complete-input">
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let completion of completions$ | async"
-                    [value]="completion">
-          {{completion.Title}}
-<!--          <img src="{{}}" alt="">-->
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
+    <form (submit)="submitSearch($event)"
+          [formGroup]="autoCompleteForm"
+          class="page-main-form">
+      <mat-form-field class="page-main-form-complete cerulean-theme">
+        <input type="text"
+               matInput
+               formControlName="query"
+               placeholder="Начните вводить название фильма ..."
+               [matAutocomplete]="auto"
+               class="page-main-form-complete-input">
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectSearch($event)">
+          <mat-option *ngFor="let completion of completions$ | async"
+                      [value]="completion.Title">
+            {{completion.Title}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
   </main>
 </section>
