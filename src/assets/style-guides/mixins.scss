@@ -25,6 +25,22 @@
   height: $value;
 }
 
+@mixin width100HeightContent {
+  width: 100%;
+  height: fit-content;
+}
+
+@mixin stretch() {
+  flex-grow: 5;
+  flex-shrink: 5;
+}
+
+@mixin noStretch() {
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+
 @mixin flexRowNoWrap() {
   display: flex;
   flex-flow: row nowrap;
@@ -35,9 +51,9 @@
   flex-flow: column nowrap;
 }
 
-@mixin flexColumnNowrapContentStartItemsCenter() {
+@mixin flexRowNowrapContentStretchItemsCenter() {
   @include flexColumnNoWrap();
-  justify-content: flex-start;
+  justify-content: stretch;
   align-items: center;
 }
 
@@ -45,4 +61,11 @@
   @include flexRowNoWrap();
   justify-content: space-between;
   align-items: center;
+}
+
+
+@mixin titleText() {
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 40px;
 }

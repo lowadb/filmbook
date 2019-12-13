@@ -1,0 +1,15 @@
+@import "src/assets/style-guides/index.scss";
+
+.page {
+
+  &-header {
+    @include width100HeightContent();
+
+    &-title {
+      @include titleText();
+    }
+  }
+
+  &-main {
+  }
+}

@@ -1,12 +1,15 @@
 @import "src/assets/style-guides/index.scss";
 
 .root {
-  height: 100%;
-  @include flexColumnNowrapContentStartItemsCenter();
+  min-height: 100vh;
+  @include flexRowNowrapContentStretchItemsCenter();
+  background: $backgroundLightBlue;
 
   &-header {
+    @include noStretch();
     @include width100HeightValue($headerHeight);
     @include flexRowNowrapContentBetweenItemsCenter();
+    background: $backgroundWhite;
     padding: 0 24px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 
@@ -15,7 +18,14 @@
   }
 
   &-main {
+    @include stretch();
     width: $containerWidth;
+    height: auto;
+    flex-grow: 5;
+    background: $backgroundWhite;
+    margin: 24px;
     padding: 24px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
   }
 }

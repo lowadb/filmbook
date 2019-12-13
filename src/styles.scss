@@ -49,3 +49,8 @@ div, header, footer, aside, main, section {
 a, button {
   cursor: pointer;
 }
+
+.page {
+  @include width100HeightContent();
+  padding: 24px;
+}
