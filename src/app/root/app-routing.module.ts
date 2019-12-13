@@ -11,7 +11,7 @@ const routes: Routes = [
     data: {preload: true, delay: 2000}
   },
   {
-    path: 'book/:id',
+    path: 'film/:id',
     loadChildren: () => import('../pages/book-page/book-page.module').then(module => module.BookPageModule),
     data: {preload: true, delay: 2000}
   },

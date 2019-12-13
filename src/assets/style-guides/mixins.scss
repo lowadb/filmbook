@@ -56,6 +56,11 @@
   flex-flow: column nowrap;
 }
 
+@mixin flexColumnNoWrap() {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
 @mixin flexRowNowrapContentStretchItemsCenter() {
   @include flexColumnNoWrap();
   justify-content: stretch;
@@ -68,6 +73,11 @@
   align-items: center;
 }
 
+@mixin flexColumnNowrapContentCenterItemsEnd() {
+  @include flexColumnNoWrap();
+  justify-content: center;
+  align-items: flex-end;
+}
 
 @mixin titleText() {
   font-weight: bold;

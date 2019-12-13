@@ -32,7 +32,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
     this.autoCompleteForm.valueChanges
       .pipe(
         takeUntil(this.destroyed$),
-        debounceTime(500),
+        debounceTime(150),
         distinctUntilChanged(),
       )
       .subscribe(changes => {
@@ -60,5 +60,10 @@ export class MainPageComponent implements OnInit, OnDestroy {
   searchByComplete() {
     const {query} = this.autoCompleteForm.getRawValue();
     this.filmStore$.dispatch(new SearchSingleFilmAction({query}));
+  }
+
+  addToFavorite($event: MouseEvent) {
+    $event.preventDefault();
+    $event.stopPropagation();
   }
 }

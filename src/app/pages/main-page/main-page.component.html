@@ -22,8 +22,10 @@
         </mat-autocomplete>
       </mat-form-field>
     </form>
-    <div class="page-main-founds" *ngFor="let film of foundedFilms$ | async">
-      <mat-card class="page-main-founds-film">
+    <div class="page-main-founds">
+      <mat-card *ngFor="let film of foundedFilms$ | async"
+                [routerLink]="'/film/' + film.imdbID"
+                class="page-main-founds-film">
         <mat-card-header>
           <div mat-card-avatar>
             <img [src]="film.Poster"
@@ -31,12 +33,14 @@
                  class="page-main-founds-film-poster">
           </div>
           <mat-card-title>{{film.Title}}</mat-card-title>
-          <mat-card-subtitle>{{film.Year}}</mat-card-subtitle>
-          <mat-card-subtitle>{{film.Type}}</mat-card-subtitle>
+          <mat-card-subtitle>{{film.Year}}
+            <span> - </span>
+            {{film.Type}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-actions>
-          <button mat-button>LIKE</button>
-          <button mat-button>SHARE</button>
+          <button mat-button
+                  (click)="addToFavorite($event)">Буду смотреть
+          </button>
         </mat-card-actions>
       </mat-card>
     </div>

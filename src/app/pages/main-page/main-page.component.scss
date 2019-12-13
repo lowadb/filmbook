@@ -27,12 +27,18 @@
 
     &-founds {
       &-film {
+        @include flexRowNowrapContentBetweenItemsCenter();
         margin: 0 0 24px;
+        background: rgba(0, 0, 0, 0.02);
 
         &-poster {
           @include widthHeightValue(40px);
           border-radius: 4px;
           object-fit: cover;
+        }
+
+        &-buttons {
+          @include flexColumnNowrapContentCenterItemsEnd();
         }
       }
     }
