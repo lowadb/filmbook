@@ -1,21 +1,42 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {registerLocaleData} from '@angular/common';
+import localeRu from '@angular/common/locales/ru';
+import {HttpClientModule} from '@angular/common/http';
+import {RouterEvent} from '@angular/router';
+import {StoreModule} from '@ngrx/store';
+import {EffectsModule} from '@ngrx/effects';
+import {environment} from '../../environments/environment';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+
+registerLocaleData(localeRu);
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
+    StoreModule.forRoot({}),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    EffectsModule.forRoot([])
   ],
-  providers: [],
+  declarations: [
+    AppComponent
+  ],
+  providers: [
+    {provide: LOCALE_ID, useValue: 'ru'},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
+}
+
+declare global {
+  interface RouterRedirectEvent extends RouterEvent {
+    urlAfterRedirects?: string;
+  }
 }

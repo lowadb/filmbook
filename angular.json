@@ -128,5 +128,8 @@
       }
     }
   },
-  "defaultProject": "filmbook"
+  "defaultProject": "filmbook",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
