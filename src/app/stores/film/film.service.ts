@@ -13,14 +13,25 @@ export class FilmService {
   ) {
   }
 
-  searchFilmByTitle(query: string): Observable<Film[]> {
+  searchFilmsByTitle(query: string): Observable<Film[]> {
     return this.http.get<FilmSearchDTO>(`${environment.apiUrl}`, {
       params: {
         apikey: environment.apiKey,
-        s: query
+        s: query.trim().split(' ').join('+').split(':').join('')
       }
     }).pipe(
       map(filmSearchDTO => filmSearchDTO.Search)
+    );
+  }
+
+  searchSingleFilmByTitle(query: string): Observable<Film[]> {
+    return this.http.get<Film>(`${environment.apiUrl}`, {
+      params: {
+        apikey: environment.apiKey,
+        t: query.split(' ').join('+').split(':').join('')
+      }
+    }).pipe(
+      map(film => [film])
     );
   }
 }

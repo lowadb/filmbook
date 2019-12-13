@@ -5,7 +5,7 @@ import {debounceTime, distinctUntilChanged, takeUntil} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 import {Film, FilmState} from '../../stores/film/film.state';
 import {Store} from '@ngrx/store';
-import {SearchByAutoCompleteFilmAction, SearchFilmAction} from '../../stores/film/film.actions';
+import {SearchByAutoCompleteFilmAction, SearchFilmAction, SearchSingleFilmAction} from '../../stores/film/film.actions';
 import {getFoundedByCompleteFilmsSelector, getFoundedBySearchFilmsSelector} from '../../stores/film/film.selectors';
 
 @Component({
@@ -51,8 +51,14 @@ export class MainPageComponent implements OnInit, OnDestroy {
     this.destroyed$.next();
   }
 
-  search() {
+  searchBySubmit() {
     const {query} = this.autoCompleteForm.getRawValue();
     this.filmStore$.dispatch(new SearchFilmAction({query}));
+    this.filmStore$.dispatch(new SearchByAutoCompleteFilmAction({query: ''}));
+  }
+
+  searchByComplete() {
+    const {query} = this.autoCompleteForm.getRawValue();
+    this.filmStore$.dispatch(new SearchSingleFilmAction({query}));
   }
 }

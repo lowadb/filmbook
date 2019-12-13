@@ -3,7 +3,7 @@
     <h1 class="page-header-title">Поиск фильмов</h1>
   </header>
   <main class="page-main">
-    <form (submit)="search()"
+    <form (submit)="searchBySubmit()"
           [formGroup]="autoCompleteForm"
           class="page-main-form">
       <mat-form-field class="page-main-form-complete cerulean-theme">
@@ -14,7 +14,7 @@
                placeholder="Начните вводить название фильма ..."
                [matAutocomplete]="auto"
                class="page-main-form-complete-input">
-        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="search()">
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="searchByComplete()">
           <mat-option *ngFor="let completion of completions$ | async"
                       [value]="completion.Title">
             {{completion.Title}}

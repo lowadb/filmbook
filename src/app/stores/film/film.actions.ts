@@ -9,6 +9,10 @@ export class SearchFilmAction extends PayloadAction<{ query: string }> {
   public static readonly TYPE = 'SearchFilmAction';
 }
 
+export class SearchSingleFilmAction extends PayloadAction<{ query: string }> {
+  public static readonly TYPE = 'SearchSingleFilmAction';
+}
+
 export class SetFoundedByCompleteFilmsAction extends PayloadAction<{ films: Film[] }> {
   public static readonly TYPE = 'SetFoundedByCompleteFilmsAction';
 }

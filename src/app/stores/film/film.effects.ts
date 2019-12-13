@@ -7,6 +7,7 @@ import {FilmService} from './film.service';
 import {
   SearchByAutoCompleteFilmAction,
   SearchFilmAction,
+  SearchSingleFilmAction,
   SetFoundedByCompleteFilmsAction,
   SetFoundedBySearchFilmsAction
 } from './film.actions';
@@ -23,14 +24,21 @@ export class FilmEffects {
   @Effect()
   completeFilmEffect = this.actions$.pipe(
     ofType<SearchByAutoCompleteFilmAction>(SearchByAutoCompleteFilmAction.TYPE),
-    switchMap(action => this.filmService.searchFilmByTitle(action.payload.query)),
+    switchMap(action => this.filmService.searchFilmsByTitle(action.payload.query)),
     map(films => new SetFoundedByCompleteFilmsAction({films}))
   );
 
   @Effect()
   searchFilmEffect = this.actions$.pipe(
     ofType<SearchFilmAction>(SearchFilmAction.TYPE),
-    switchMap(action => this.filmService.searchFilmByTitle(action.payload.query)),
+    switchMap(action => this.filmService.searchFilmsByTitle(action.payload.query)),
+    map(films => new SetFoundedBySearchFilmsAction({films}))
+  );
+  
+  @Effect()
+  searchSingleFilmEffect = this.actions$.pipe(
+    ofType<SearchSingleFilmAction>(SearchSingleFilmAction.TYPE),
+    switchMap(action => this.filmService.searchSingleFilmByTitle(action.payload.query)),
     map(films => new SetFoundedBySearchFilmsAction({films}))
   );
 }
