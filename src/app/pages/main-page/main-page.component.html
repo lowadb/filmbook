@@ -3,6 +3,20 @@
     <h1 class="page-header-title">Поиск фильмов</h1>
   </header>
   <main class="page-main">
-
+    <mat-form-field class="page-main-complete cerulean-theme"
+                    [formGroup]="autoCompleteForm">
+      <input type="text"
+             matInput
+             formControlName="query"
+             placeholder="Начните вводить название фильма ..."
+             [matAutocomplete]="auto"
+             class="page-main-complete-input">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let completion of completions"
+                    [value]="completion">
+          {{completion}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
   </main>
 </section>
