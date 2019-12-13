@@ -27,6 +27,8 @@
 
     &-founds {
       &-film {
+        margin: 0 0 24px;
+
         &-poster {
           @include widthHeightValue(40px);
           border-radius: 4px;
@@ -35,4 +37,8 @@
       }
     }
   }
+}
+
+::ng-deep .mat-autocomplete-panel {
+  @include scrollbar();
 }

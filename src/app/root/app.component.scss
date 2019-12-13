@@ -20,6 +20,7 @@
   &-main {
     @include stretch();
     width: $containerWidth;
+    max-width: 98vw;
     height: auto;
     flex-grow: 5;
     background: $backgroundWhite;

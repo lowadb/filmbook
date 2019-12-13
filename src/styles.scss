@@ -53,7 +53,3 @@ a, button {
   @include width100HeightContent();
   padding: 24px;
 }
-
-::ng-deep .mat-autocomplete-panel {
-  @include scrollbar();
-}
