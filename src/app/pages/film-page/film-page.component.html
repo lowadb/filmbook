@@ -4,6 +4,10 @@
     <h1 class="page-header-title">
       {{film.Title}}
     </h1>
+    <button mat-raised-button
+            (click)="addToFavorite()"
+            color="primary">Добавить в избранное
+    </button>
   </header>
   <main class="page-main">
     <div class="page-main-left">
@@ -13,7 +17,7 @@
     </div>
     <div class="page-main-right">
       <div *ngFor="let field of fields"
-        class="page-main-right-row">
+           class="page-main-right-row">
         <h4 class="page-main-right-row-name">{{field.name}}:</h4>
         <p class="page-main-right-row-value">{{film[field.id]}}</p>
       </div>

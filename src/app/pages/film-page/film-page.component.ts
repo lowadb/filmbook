@@ -40,4 +40,8 @@ export class FilmPageComponent implements OnInit, OnDestroy {
     this.destroyed$.next();
     this.filmStore$.dispatch(new UnSetActiveFilm());
   }
+
+  addToFavorite() {
+
+  }
 }

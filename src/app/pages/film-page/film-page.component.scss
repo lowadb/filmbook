@@ -4,6 +4,7 @@
 
   &-header {
     @include width100HeightContent();
+    @include flexRowWrapContentBetweenItemsStart();
 
     &-title {
       @include titleText();
