@@ -47,7 +47,7 @@ export class FilmEffects {
   @Effect()
   searchActiveFilmEffect = this.actions$.pipe(
     ofType<GetActiveFilm>(GetActiveFilm.TYPE),
-    switchMap(action => this.filmService.searchSingleFilmByTitle(action.payload.id)),
-    map(films => new SetActiveFilm({film: films[0]}))
+    switchMap(action => this.filmService.searchSingleFilmById(action.payload.id)),
+    map(film => new SetActiveFilm({film}))
   );
 }

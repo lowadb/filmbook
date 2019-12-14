@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
-import {NavigationCancel, NavigationEnd, Router} from '@angular/router';
+import {ActivatedRoute, NavigationCancel, NavigationEnd, Router} from '@angular/router';
 import {Observable, Subject} from 'rxjs';
 import {filter, takeUntil} from 'rxjs/operators';
 import {GetActiveFilm, UnSetActiveFilm} from '../../stores/film/film.actions';
@@ -19,16 +19,28 @@ export class FilmPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private filmStore$: Store<FilmState>
+    private filmStore$: Store<FilmState>,
+    private route: ActivatedRoute
   ) {
     this.film$ = this.filmStore$.select(getActiveFilmSelector);
-    this.router.events
-      .pipe(
-        takeUntil(this.destroyed$),
-        filter(event => event instanceof NavigationEnd || event instanceof NavigationCancel))
-      .subscribe((event: RouterRedirectEvent) =>
-        this.filmStore$.dispatch(new GetActiveFilm({id: (event.urlAfterRedirects || event.url)}))
-      );
+    this.film$.subscribe(film => console.log(JSON.stringify(film, null, 2)));
+    // this.router.events
+    //   .pipe(
+    //     takeUntil(this.destroyed$),
+    //     filter(event => event instanceof NavigationEnd || event instanceof NavigationCancel))
+    //   .subscribe((event: RouterRedirectEvent) => {
+    //     const url = (event.urlAfterRedirects || event.url);
+    //     console.log({url});
+    //     // this.filmStore$.dispatch(new GetActiveFilm({id: ''}))
+    //   });
+
+    this.route.params
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(params => {
+        (params && params.id)
+          ? this.filmStore$.dispatch(new GetActiveFilm({id: params.id}))
+          : this.router.navigate(['/error']);
+      });
   }
 
   ngOnInit() {

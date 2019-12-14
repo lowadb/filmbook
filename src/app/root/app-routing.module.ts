@@ -16,6 +16,11 @@ const routes: Routes = [
     data: {preload: true, delay: 2000}
   },
   {
+    path: 'error',
+    loadChildren: () => import('../pages/error-page/error-page.module').then(module => module.ErrorPageModule),
+    data: {preload: true, delay: 2000}
+  },
+  {
     path: '**',
     redirectTo: '/',
     pathMatch: 'full'
