@@ -1,0 +1,30 @@
+<section class="page">
+  <header class="page-header">
+    <h1 class="page-header-title">Поиск фильмов</h1>
+  </header>
+  <main class="page-main">
+    <div class="page-main-films">
+      <mat-card *ngFor="let film of films$ | async"
+                [routerLink]="'/film/' + film.imdbID"
+                class="page-main-films-film">
+        <mat-card-header>
+          <div mat-card-avatar>
+            <img [src]="film.Poster"
+                 [alt]="film.Title"
+                 class="page-main-films-film-poster">
+          </div>
+          <mat-card-title>{{film.Title}}</mat-card-title>
+          <mat-card-subtitle>{{film.Year}}
+            <span> - </span>
+            {{film.Type}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions>
+          <button mat-raised-button
+                  color="warn"
+                  (click)="deleteFromFavorite($event, film)">Удалить из избранного
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </main>
+</section>

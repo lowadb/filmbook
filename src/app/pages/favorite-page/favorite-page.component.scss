@@ -1,0 +1,35 @@
+@import "../../../../src/assets/style-guides/index.scss";
+
+.page {
+
+  &-header {
+    @include width100HeightContent();
+
+    &-title {
+      @include titleText();
+    }
+  }
+
+  &-main {
+    width: 100%;
+
+    &-films {
+      &-film {
+        @include flexRowWrapContentBetweenItemsStart();
+        margin: 0 0 24px;
+        background: rgba(0, 0, 0, 0.02);
+        cursor: pointer;
+
+        &-poster {
+          @include widthHeightValue(40px);
+          border-radius: 4px;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+}
+
+::ng-deep .mat-autocomplete-panel {
+  @include scrollbar();
+}
