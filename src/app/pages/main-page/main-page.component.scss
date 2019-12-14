@@ -30,6 +30,7 @@
         @include flexRowNowrapContentBetweenItemsCenter();
         margin: 0 0 24px;
         background: rgba(0, 0, 0, 0.02);
+        cursor: pointer;
 
         &-poster {
           @include widthHeightValue(40px);

@@ -12,7 +12,7 @@ const routes: Routes = [
   },
   {
     path: 'film/:id',
-    loadChildren: () => import('../pages/book-page/book-page.module').then(module => module.BookPageModule),
+    loadChildren: () => import('../pages/film-page/film-page.module').then(module => module.FilmPageModule),
     data: {preload: true, delay: 2000}
   },
   {
