@@ -5,7 +5,7 @@ import {debounceTime, distinctUntilChanged, takeUntil} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 import {Film, FilmState} from '../../stores/film/film.state';
 import {Store} from '@ngrx/store';
-import {SearchByAutoCompleteFilmAction, SearchFilmAction, SearchSingleFilmAction} from '../../stores/film/film.actions';
+import {InitFilmsAction, SearchByAutoCompleteFilmAction, SearchFilmAction, SearchSingleFilmAction} from '../../stores/film/film.actions';
 import {getFoundedByCompleteFilmsSelector, getFoundedBySearchFilmsSelector} from '../../stores/film/film.selectors';
 
 @Component({
@@ -45,6 +45,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.filmStore$.dispatch(new InitFilmsAction());
   }
 
   ngOnDestroy(): void {

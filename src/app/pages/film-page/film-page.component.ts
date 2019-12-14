@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/co
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {GetActiveFilm, UnSetActiveFilm} from '../../stores/film/film.actions';
+import {GetActiveFilm, InitFilmsAction, UnSetActiveFilm} from '../../stores/film/film.actions';
 import {Store} from '@ngrx/store';
 import {Field, Film, FILM_FIELDS, FilmState} from '../../stores/film/film.state';
 import {getActiveFilmSelector} from '../../stores/film/film.selectors';

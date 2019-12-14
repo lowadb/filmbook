@@ -6,6 +6,7 @@ import {map, switchMap} from 'rxjs/operators';
 import {FilmService} from './film.service';
 import {
   GetActiveFilm,
+  InitFilmsAction,
   SearchByAutoCompleteFilmAction,
   SearchFilmAction,
   SearchSingleFilmAction,
@@ -34,14 +35,20 @@ export class FilmEffects {
   searchFilmEffect = this.actions$.pipe(
     ofType<SearchFilmAction>(SearchFilmAction.TYPE),
     switchMap(action => this.filmService.searchFilmsByTitle(action.payload.query)),
-    map(films => new SetFoundedBySearchFilmsAction({films}))
+    map(films => {
+      this.filmService.setFilmsToLocalStorage(films);
+      return new SetFoundedBySearchFilmsAction({films});
+    })
   );
 
   @Effect()
   searchSingleFilmEffect = this.actions$.pipe(
     ofType<SearchSingleFilmAction>(SearchSingleFilmAction.TYPE),
     switchMap(action => this.filmService.searchSingleFilmByTitle(action.payload.query)),
-    map(films => new SetFoundedBySearchFilmsAction({films}))
+    map(films => {
+      this.filmService.setFilmsToLocalStorage(films);
+      return new SetFoundedBySearchFilmsAction({films});
+    })
   );
 
   @Effect()
@@ -49,5 +56,12 @@ export class FilmEffects {
     ofType<GetActiveFilm>(GetActiveFilm.TYPE),
     switchMap(action => this.filmService.searchSingleFilmById(action.payload.id)),
     map(film => new SetActiveFilm({film}))
+  );
+
+  @Effect()
+  initFilmsEffect = this.actions$.pipe(
+    ofType<InitFilmsAction>(InitFilmsAction.TYPE),
+    switchMap(() => this.filmService.getFilmsFromLocalStorage()),
+    map(films => new SetFoundedBySearchFilmsAction({films}))
   );
 }

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {Film, FilmSearchDTO} from './film.state';
+import {Observable, of} from 'rxjs';
+import {Film, FilmSearchDTO, LOCAL_STORAGE_NAME} from './film.state';
 import {environment} from '../../../environments/environment';
 import {map} from 'rxjs/operators';
 
@@ -44,5 +44,17 @@ export class FilmService {
     }).pipe(
       map(film => (film.Response !== 'False') ? film : null)
     );
+  }
+
+  getFilmsFromLocalStorage(): Observable<Film[]> {
+    try {
+      return of(JSON.parse(localStorage.getItem(LOCAL_STORAGE_NAME)).films);
+    } catch (e) {
+      return of([]);
+    }
+  }
+
+  setFilmsToLocalStorage(films: Film[]): void {
+    localStorage.setItem(LOCAL_STORAGE_NAME, JSON.stringify({films}));
   }
 }

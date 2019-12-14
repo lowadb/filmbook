@@ -1,5 +1,6 @@
 export const FILM_FEATURE_NAME = 'state.film';
 export const REQUEST_LIMIT = 10;
+export const LOCAL_STORAGE_NAME = 'films';
 
 export interface FilmState {
   films: Film[];
