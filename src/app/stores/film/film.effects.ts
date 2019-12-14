@@ -8,7 +8,8 @@ import {
   AddFavoriteFilmAction,
   GetActiveFilm,
   InitFavoriteFilmsAction,
-  InitFilmsAction, RemoveFavoriteFilmAction,
+  InitFilmsAction,
+  RemoveFavoriteFilmAction,
   SearchByAutoCompleteFilmAction,
   SearchFilmAction,
   SearchSingleFilmAction,
@@ -84,7 +85,9 @@ export class FilmEffects {
     map(state => {
       const films = state[1];
       const film = state[0].payload.film;
-      films.push(film);
+      if (films && !films.map(fil => fil.imdbID).includes(film.imdbID)) {
+        films.push(film);
+      }
       return this.filmService.setFavoriteFilmsToLocalStorage(films);
     }),
     map(() => new InitFavoriteFilmsAction())

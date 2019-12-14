@@ -6,7 +6,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {registerLocaleData} from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
 import {HttpClientModule} from '@angular/common/http';
-import {RouterEvent} from '@angular/router';
 import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
 import {environment} from '../../environments/environment';
@@ -33,10 +32,4 @@ registerLocaleData(localeRu);
   bootstrap: [AppComponent]
 })
 export class AppModule {
-}
-
-declare global {
-  interface RouterRedirectEvent extends RouterEvent {
-    urlAfterRedirects?: string;
-  }
 }

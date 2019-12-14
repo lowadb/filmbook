@@ -5,7 +5,7 @@
       {{film.Title}}
     </h1>
     <button mat-raised-button
-            (click)="addToFavorite()"
+            (click)="addToFavorite(film)"
             color="primary">Добавить в избранное
     </button>
   </header>
@@ -19,7 +19,8 @@
       <div *ngFor="let field of fields"
            class="page-main-right-row">
         <h4 class="page-main-right-row-name">{{field.name}}:</h4>
-        <p class="page-main-right-row-value">{{film[field.id]}}</p>
+        <p *ngIf="field.id !== 'Released'" class="page-main-right-row-value">{{film[field.id]}}</p>
+        <p *ngIf="field.id === 'Released'" class="page-main-right-row-value">{{film[field.id] | date : 'dd MMMM yyyy'}}</p>
       </div>
     </div>
     <div class="page-main-bottom">
