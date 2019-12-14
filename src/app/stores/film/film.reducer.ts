@@ -10,21 +10,18 @@ import {
 
 export const reducers = combineActionReducers(initialFilmState, {
   [SetFoundedByCompleteFilmsAction.TYPE]: (state: FilmState, action: SetFoundedByCompleteFilmsAction) => {
-    console.log('by complete ', action.payload.films);
     return {
       ...state,
       completeFoundedFilms: action.payload.films
     };
   },
   [SetFoundedBySearchFilmsAction.TYPE]: (state: FilmState, action: SetFoundedBySearchFilmsAction) => {
-    console.log('by search ', action.payload.films);
     return {
       ...state,
       searchFoundedFilms: action.payload.films
     };
   },
   [SetActiveFilm.TYPE]: (state: FilmState, action: SetActiveFilm) => {
-    console.log('active film ', action.payload.film);
     return {
       ...state,
       activeFilm: action.payload.film
