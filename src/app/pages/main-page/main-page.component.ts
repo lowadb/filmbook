@@ -5,7 +5,13 @@ import {debounceTime, distinctUntilChanged, takeUntil} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 import {Film, FilmState} from '../../stores/film/film.state';
 import {Store} from '@ngrx/store';
-import {InitFilmsAction, SearchByAutoCompleteFilmAction, SearchFilmAction, SearchSingleFilmAction} from '../../stores/film/film.actions';
+import {
+  AddFavoriteFilm,
+  InitFilmsAction,
+  SearchByAutoCompleteFilmAction,
+  SearchFilmAction,
+  SearchSingleFilmAction
+} from '../../stores/film/film.actions';
 import {getFoundedByCompleteFilmsSelector, getFoundedBySearchFilmsSelector} from '../../stores/film/film.selectors';
 
 @Component({
@@ -20,13 +26,10 @@ export class MainPageComponent implements OnInit, OnDestroy {
   completions$: Observable<Film[]>;
   foundedFilms$: Observable<Film[]>;
   destroyed$ = new Subject();
-  imgUrl: string;
-
 
   constructor(
     private filmStore$: Store<FilmState>
   ) {
-    // this.imgUrl = `${environment.apiPosterUrl}?apikey=${environment.apiKey}&i=`;
     this.completions$ = this.filmStore$.select(getFoundedByCompleteFilmsSelector);
     this.foundedFilms$ = this.filmStore$.select(getFoundedBySearchFilmsSelector);
     this.autoCompleteForm.valueChanges
@@ -63,7 +66,8 @@ export class MainPageComponent implements OnInit, OnDestroy {
     this.filmStore$.dispatch(new SearchSingleFilmAction({query}));
   }
 
-  addToFavorite($event: MouseEvent) {
+  addToFavorite($event: MouseEvent, film: Film) {
+    this.filmStore$.dispatch(new AddFavoriteFilm({film}));
     $event.preventDefault();
     $event.stopPropagation();
   }
