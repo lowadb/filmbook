@@ -51,3 +51,24 @@ export interface FilmSearchDTO {
   totalResults: number;
   Response: boolean;
 }
+
+export interface Field {
+  id: string;
+  name: string;
+}
+
+export const FILM_FIELDS: Field[] = [
+  {id: 'Plot', name: 'Описание'},
+  {id: 'Runtime', name: 'Продолжительность'},
+  {id: 'Director', name: 'Продюссер'},
+  {id: 'Writer', name: 'Сценарист'},
+  {id: 'Actors', name: 'В главных ролях'},
+  {id: 'Year', name: 'Год выпуска'},
+  {id: 'Released', name: 'Дата выхода в прокат'},
+  {id: 'Genre', name: 'Жанр'},
+  {id: 'Language', name: 'Язык'},
+  {id: 'Country', name: 'Страна'},
+  {id: 'Awards', name: 'Награды'},
+  {id: 'imdbRating', name: 'Рейтинг'},
+  {id: 'Type', name: 'Тип'},
+];

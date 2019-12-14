@@ -12,14 +12,14 @@
            class="page-main-left-poster">
     </div>
     <div class="page-main-right">
-      <div class="page-main-right-row">
-        <h4 class="page-main-right-row-name"></h4>
-        <p class="page-main-right-row-value"></p>
+      <div *ngFor="let field of fields"
+        class="page-main-right-row">
+        <h4 class="page-main-right-row-name">{{field.name}}:</h4>
+        <p class="page-main-right-row-value">{{film[field.id]}}</p>
       </div>
     </div>
     <div class="page-main-bottom">
       <p class="page-main-bottom-description">
-        {{film.Plot}}
       </p>
     </div>
   </main>

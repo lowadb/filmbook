@@ -11,11 +11,55 @@
   }
 
   &-main {
+    @include flexRowWrapContentBetweenItemsStart();
     width: 100%;
+    padding-top: 24px;
+
+    &-left {
+      &-poster {
+        width: 300px;
+        height: 450px;
+        object-fit: contain;
+        margin-bottom: 24px;
+      }
+    }
+
+    &-right {
+      width: calc(100% - 340px);
+
+      @media screen and (max-width: $mobileWidth) {
+        width: 100%;
+      }
+
+      &-row {
+        @include flexRowWrapContentStartItemsStart();
+        margin-bottom: 8px;
+
+        &-name {
+          @include normalText();
+          font-weight: 500;
+          min-width: 165px;
+        }
+
+        &-value {
+          @include normalText();
+          margin-left: 24px;
+          width: calc(100% - 200px);
+
+          @media screen and (max-width: $smallMobileWidth) {
+            width: 100%;
+            margin-left: 0;
+          }
+        }
+      }
+    }
 
     &-bottom {
-      &-desciption {
+      width: 100%;
+      padding-top: 24px;
 
+      &-desciption {
+        @include normalText();
       }
     }
   }

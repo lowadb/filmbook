@@ -46,6 +46,11 @@
 }
 
 
+@mixin flexRowWrap() {
+  display: flex;
+  flex-flow: row wrap;
+}
+
 @mixin flexRowNoWrap() {
   display: flex;
   flex-flow: row nowrap;
@@ -73,6 +78,18 @@
   align-items: center;
 }
 
+@mixin flexRowWrapContentBetweenItemsStart() {
+  @include flexRowWrap();
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+@mixin flexRowWrapContentStartItemsStart() {
+  @include flexRowWrap();
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
 @mixin flexColumnNowrapContentCenterItemsEnd() {
   @include flexColumnNoWrap();
   justify-content: center;
@@ -83,4 +100,16 @@
   font-weight: bold;
   font-size: 24px;
   line-height: 40px;
+}
+
+@mixin subTitleText() {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 26px;
+}
+
+@mixin normalText() {
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 20px;
 }
