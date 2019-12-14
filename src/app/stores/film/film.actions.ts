@@ -1,4 +1,4 @@
-import {PayloadAction} from '../../utils/ngrx-combine-action-reducers';
+import {PayloadAction, SimpleAction} from '../../utils/ngrx-combine-action-reducers';
 import {Film} from './film.state';
 
 export class SearchByAutoCompleteFilmAction extends PayloadAction<{ query: string }> {
@@ -20,3 +20,16 @@ export class SetFoundedByCompleteFilmsAction extends PayloadAction<{ films: Film
 export class SetFoundedBySearchFilmsAction extends PayloadAction<{ films: Film[] }> {
   public static readonly TYPE = 'SetFoundedBySearchFilmsAction';
 }
+
+export class GetActiveFilm extends PayloadAction<{ id: string }> {
+  public static readonly TYPE = 'GetActiveFilm';
+}
+
+export class SetActiveFilm extends PayloadAction<{ film: Film }> {
+  public static readonly TYPE = 'SetActiveFilm';
+}
+
+export class UnSetActiveFilm extends SimpleAction {
+  public static readonly TYPE = 'UnSetActiveFilm';
+}
+

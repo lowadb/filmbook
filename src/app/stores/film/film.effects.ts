@@ -5,9 +5,11 @@ import {Store} from '@ngrx/store';
 import {map, switchMap} from 'rxjs/operators';
 import {FilmService} from './film.service';
 import {
+  GetActiveFilm,
   SearchByAutoCompleteFilmAction,
   SearchFilmAction,
   SearchSingleFilmAction,
+  SetActiveFilm,
   SetFoundedByCompleteFilmsAction,
   SetFoundedBySearchFilmsAction
 } from './film.actions';
@@ -34,11 +36,18 @@ export class FilmEffects {
     switchMap(action => this.filmService.searchFilmsByTitle(action.payload.query)),
     map(films => new SetFoundedBySearchFilmsAction({films}))
   );
-  
+
   @Effect()
   searchSingleFilmEffect = this.actions$.pipe(
     ofType<SearchSingleFilmAction>(SearchSingleFilmAction.TYPE),
     switchMap(action => this.filmService.searchSingleFilmByTitle(action.payload.query)),
     map(films => new SetFoundedBySearchFilmsAction({films}))
+  );
+
+  @Effect()
+  searchActiveFilmEffect = this.actions$.pipe(
+    ofType<GetActiveFilm>(GetActiveFilm.TYPE),
+    switchMap(action => this.filmService.searchSingleFilmByTitle(action.payload.id)),
+    map(films => new SetActiveFilm({film: films[0]}))
   );
 }

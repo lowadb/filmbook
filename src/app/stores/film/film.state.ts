@@ -6,6 +6,7 @@ export interface FilmState {
   completeFoundedFilms: Film[];
   searchFoundedFilms: Film[];
   savedFilms: Film[];
+  activeFilm: Film;
 }
 
 export const initialFilmState: FilmState = {
@@ -13,6 +14,7 @@ export const initialFilmState: FilmState = {
   completeFoundedFilms: [],
   searchFoundedFilms: [],
   savedFilms: [],
+  activeFilm: null,
 };
 
 export interface Film {

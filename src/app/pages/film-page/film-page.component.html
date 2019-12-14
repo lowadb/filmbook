@@ -1,1 +1,27 @@
-<p>film-page works!</p>
+<section
+  *ngIf="(film$ | async) as film"
+  class="page">
+  <header class="page-header">
+    <h1 class="page-header-title">
+      {{film.Title}}
+    </h1>
+  </header>
+  <main class="page-main">
+    <div class="page-main-left">
+      <img [src]="film.Poster"
+           [alt]="film.Title"
+           class="page-main-left-poster">
+    </div>
+    <div class="page-main-right">
+      <div class="page-main-right-row">
+        <h4 class="page-main-right-row-name"></h4>
+        <p class="page-main-right-row-value"></p>
+      </div>
+    </div>
+    <div class="page-main-bottom">
+      <p class="page-main-bottom-description">
+        {{film.Title}}
+      </p>
+    </div>
+  </main>
+</section>

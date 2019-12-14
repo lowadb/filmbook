@@ -1,6 +1,6 @@
 import {FilmState, initialFilmState} from './film.state';
 import {combineActionReducers, SimpleAction} from '../../utils/ngrx-combine-action-reducers';
-import {SetFoundedByCompleteFilmsAction, SetFoundedBySearchFilmsAction} from './film.actions';
+import {SetActiveFilm, SetFoundedByCompleteFilmsAction, SetFoundedBySearchFilmsAction, UnSetActiveFilm} from './film.actions';
 
 export const reducers = combineActionReducers(initialFilmState, {
   [SetFoundedByCompleteFilmsAction.TYPE]: (state: FilmState, action: SetFoundedByCompleteFilmsAction) => {
@@ -15,6 +15,19 @@ export const reducers = combineActionReducers(initialFilmState, {
     return {
       ...state,
       searchFoundedFilms: action.payload.films
+    };
+  },
+  [SetActiveFilm.TYPE]: (state: FilmState, action: SetActiveFilm) => {
+    console.log('active film ', action.payload.film);
+    return {
+      ...state,
+      activeFilm: action.payload.film
+    };
+  },
+  [UnSetActiveFilm.TYPE]: (state: FilmState, action: UnSetActiveFilm) => {
+    return {
+      ...state,
+      activeFilm: null
     };
   },
 });
