@@ -41,19 +41,19 @@ export class UnSetActiveFilm extends SimpleAction {
   public static readonly TYPE = 'UnSetActiveFilm';
 }
 
-export class GetFavoriteFilms extends SimpleAction {
-  public static readonly TYPE = 'GetFavoriteFilms';
+export class InitFavoriteFilmsAction extends SimpleAction {
+  public static readonly TYPE = 'InitFavoriteFilmsAction';
 }
 
-export class SetFavoriteFilms extends PayloadAction<{ films: Film[] }> {
-  public static readonly TYPE = 'SetFavoriteFilms';
+export class SetFavoriteFilmsAction extends PayloadAction<{ films: Film[] }> {
+  public static readonly TYPE = 'SetFavoriteFilmsAction';
 }
 
-export class AddFavoriteFilm extends PayloadAction<{ film: Film }> {
-  public static readonly TYPE = 'AddFavoriteFilm';
+export class AddFavoriteFilmAction extends PayloadAction<{ film: Film }> {
+  public static readonly TYPE = 'AddFavoriteFilmAction';
 }
 
-export class RemoveFavoriteFilm extends PayloadAction<{ film: Film }> {
-  public static readonly TYPE = 'RemoveFavoriteFilm';
+export class RemoveFavoriteFilmAction extends PayloadAction<{ film: Film }> {
+  public static readonly TYPE = 'RemoveFavoriteFilmAction';
 }
 

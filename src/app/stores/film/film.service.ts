@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
-import {Film, FilmSearchDTO, LOCAL_STORAGE_NAME} from './film.state';
+import {Film, FilmSearchDTO, LOCAL_STORAGE_FAVORITE_FILMS_NAME, LOCAL_STORAGE_FILMS_NAME} from './film.state';
 import {environment} from '../../../environments/environment';
 import {map} from 'rxjs/operators';
 
@@ -48,13 +48,25 @@ export class FilmService {
 
   getFilmsFromLocalStorage(): Observable<Film[]> {
     try {
-      return of(JSON.parse(localStorage.getItem(LOCAL_STORAGE_NAME)).films);
+      return of(JSON.parse(localStorage.getItem(LOCAL_STORAGE_FILMS_NAME)));
     } catch (e) {
       return of([]);
     }
   }
 
   setFilmsToLocalStorage(films: Film[]): void {
-    localStorage.setItem(LOCAL_STORAGE_NAME, JSON.stringify({films}));
+    localStorage.setItem(LOCAL_STORAGE_FILMS_NAME, JSON.stringify(films));
+  }
+
+  getFavoriteFilmsFromLocalStorage(): Observable<Film[]> {
+    try {
+      return of(JSON.parse(localStorage.getItem(LOCAL_STORAGE_FAVORITE_FILMS_NAME)));
+    } catch (e) {
+      return of([]);
+    }
+  }
+
+  setFavoriteFilmsToLocalStorage(favoriteFilms: Film[]): void {
+    localStorage.setItem(LOCAL_STORAGE_FAVORITE_FILMS_NAME, JSON.stringify(favoriteFilms));
   }
 }

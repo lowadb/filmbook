@@ -2,24 +2,28 @@ import {Injectable} from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
 import {FilmState} from './film.state';
 import {Store} from '@ngrx/store';
-import {map, switchMap} from 'rxjs/operators';
+import {filter, map, switchMap, withLatestFrom} from 'rxjs/operators';
 import {FilmService} from './film.service';
 import {
+  AddFavoriteFilmAction,
   GetActiveFilm,
-  InitFilmsAction,
+  InitFavoriteFilmsAction,
+  InitFilmsAction, RemoveFavoriteFilmAction,
   SearchByAutoCompleteFilmAction,
   SearchFilmAction,
   SearchSingleFilmAction,
   SetActiveFilm,
+  SetFavoriteFilmsAction,
   SetFoundedByCompleteFilmsAction,
   SetFoundedBySearchFilmsAction
 } from './film.actions';
+import {getFavoriteFilmsSelector} from './film.selectors';
 
 @Injectable()
 export class FilmEffects {
   constructor(
     private actions$: Actions,
-    private filmStore: Store<FilmState>,
+    private filmStore$: Store<FilmState>,
     private filmService: FilmService
   ) {
   }
@@ -63,5 +67,37 @@ export class FilmEffects {
     ofType<InitFilmsAction>(InitFilmsAction.TYPE),
     switchMap(() => this.filmService.getFilmsFromLocalStorage()),
     map(films => new SetFoundedBySearchFilmsAction({films}))
+  );
+
+  @Effect()
+  initFavoriteFilmsEffect = this.actions$.pipe(
+    ofType<InitFavoriteFilmsAction>(InitFavoriteFilmsAction.TYPE),
+    switchMap(() => this.filmService.getFavoriteFilmsFromLocalStorage()),
+    map(films => new SetFavoriteFilmsAction({films}))
+  );
+
+  @Effect()
+  addFavoriteFilmEffect = this.actions$.pipe(
+    ofType<AddFavoriteFilmAction>(AddFavoriteFilmAction.TYPE),
+    withLatestFrom(this.filmStore$.select(getFavoriteFilmsSelector)),
+    filter(state => !!(state[0] && state[1])),
+    map(state => {
+      const films = state[1];
+      const film = state[0].payload.film;
+      films.push(film);
+      return this.filmService.setFavoriteFilmsToLocalStorage(films);
+    }),
+    map(() => new InitFavoriteFilmsAction())
+  );
+
+  @Effect()
+  removeFavoriteFilmEffect = this.actions$.pipe(
+    ofType<RemoveFavoriteFilmAction>(RemoveFavoriteFilmAction.TYPE),
+    withLatestFrom(this.filmStore$.select(getFavoriteFilmsSelector)),
+    filter(state => !!(state[0] && state[1])),
+    map(state => {
+      return this.filmService.setFavoriteFilmsToLocalStorage(state[1].filter(film => film.imdbID !== state[0].payload.film.imdbID));
+    }),
+    map(() => new InitFavoriteFilmsAction())
   );
 }

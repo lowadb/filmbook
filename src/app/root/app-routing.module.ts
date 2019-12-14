@@ -13,12 +13,17 @@ const routes: Routes = [
   {
     path: 'film/:id',
     loadChildren: () => import('../pages/film-page/film-page.module').then(module => module.FilmPageModule),
-    data: {preload: true, delay: 2000}
+    data: {preload: true, delay: 3000}
   },
   {
     path: 'error',
     loadChildren: () => import('../pages/error-page/error-page.module').then(module => module.ErrorPageModule),
-    data: {preload: true, delay: 2000}
+    data: {preload: true, delay: 4000}
+  },
+  {
+    path: 'favorite',
+    loadChildren: () => import('../pages/favorite-page/favorite-page.module').then(module => module.FavoritePageModule),
+    data: {preload: true, delay: 5000}
   },
   {
     path: '**',

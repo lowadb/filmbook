@@ -1,12 +1,13 @@
 export const FILM_FEATURE_NAME = 'state.film';
 export const REQUEST_LIMIT = 10;
-export const LOCAL_STORAGE_NAME = 'films';
+export const LOCAL_STORAGE_FILMS_NAME = 'films';
+export const LOCAL_STORAGE_FAVORITE_FILMS_NAME = 'favoriteFilms';
 
 export interface FilmState {
   films: Film[];
   completeFoundedFilms: Film[];
   searchFoundedFilms: Film[];
-  savedFilms: Film[];
+  favoriteFilms: Film[];
   activeFilm: Film;
 }
 
@@ -14,7 +15,7 @@ export const initialFilmState: FilmState = {
   films: [],
   completeFoundedFilms: [],
   searchFoundedFilms: [],
-  savedFilms: [],
+  favoriteFilms: [],
   activeFilm: null,
 };
 

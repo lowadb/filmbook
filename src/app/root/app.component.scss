@@ -1,4 +1,4 @@
-@import "src/assets/style-guides/index.scss";
+@import "../../../src/assets/style-guides/index.scss";
 
 .root {
   min-height: 100vh;
@@ -13,7 +13,19 @@
     padding: 0 24px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 
-    &-links {
+    &-navbar {
+      &-link {
+        color: $blueTextColor;
+        margin-right: 24px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        &:focus {
+          text-decoration: underline;
+        }
+      }
     }
   }
 

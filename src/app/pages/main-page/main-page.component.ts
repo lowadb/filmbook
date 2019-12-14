@@ -6,7 +6,7 @@ import {environment} from '../../../environments/environment';
 import {Film, FilmState} from '../../stores/film/film.state';
 import {Store} from '@ngrx/store';
 import {
-  AddFavoriteFilm,
+  AddFavoriteFilmAction,
   InitFilmsAction,
   SearchByAutoCompleteFilmAction,
   SearchFilmAction,
@@ -47,8 +47,8 @@ export class MainPageComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnInit() {
-    this.filmStore$.dispatch(new InitFilmsAction());
+    ngOnInit() {
+      this.filmStore$.dispatch(new InitFilmsAction());
   }
 
   ngOnDestroy(): void {
@@ -67,7 +67,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
   }
 
   addToFavorite($event: MouseEvent, film: Film) {
-    this.filmStore$.dispatch(new AddFavoriteFilm({film}));
+    this.filmStore$.dispatch(new AddFavoriteFilmAction({film}));
     $event.preventDefault();
     $event.stopPropagation();
   }
